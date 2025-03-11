@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import data from '../data/regions.json';
+import Link from 'next/link';
 
 function Regions() {
   // Create a state array to keep track of chevron direction for each state
@@ -53,9 +54,11 @@ function Regions() {
               {!chevrons[index] && (
                 <div className="flex flex-row flex-wrap w-full mt-4 gap-2 justify-start">
                   {cities.map((city, cityIndex) => (
-                    <div key={cityIndex} className=" p-2 text-center font-light">
-                      <a href=''>{city.city}</a>
-                    </div>
+                    <div key={cityIndex} className="p-2 text-center font-light">
+                    <Link href={`/locations?state=${encodeURIComponent(state || '')}&city=${encodeURIComponent(city.city || '')}`} className="text-blue-500 hover:underline">
+                      {city.city}
+                    </Link>
+                  </div>
                   ))}
                 </div>
               )}
