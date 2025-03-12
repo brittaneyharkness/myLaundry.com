@@ -4,7 +4,7 @@ import regions from '../data/regions.json'
 import { useSearchParams } from 'next/navigation';
 import { CalciteCard, CalciteTile, CalciteTileGroup } from '@esri/calcite-components-react';
 
-import "@esri/calcite-components/components/calcite-cared"
+import "@esri/calcite-components/components/calcite-card"
 import "@esri/calcite-components/components/calcite-tile"
 
 function PlaceList() {
@@ -24,8 +24,10 @@ function PlaceList() {
             if(city && state){
               if(place.city === city && place.state === state_abbr[0]){
                 return(
-                  <CalciteCard label={place.name} heading={place.name}>
-                    
+                  <CalciteCard label={place.name}>
+                    <div>
+                      
+                    </div>
                   </CalciteCard> 
 
                 )
@@ -34,7 +36,7 @@ function PlaceList() {
             if(!city && state){
               if(place.state === state_abbr[0]){
                 return(
-                  <CalciteCard label={place.name} heading={place.name}>
+                  <CalciteCard label={place.name}>
                    
                   </CalciteCard> 
                 )
@@ -44,7 +46,7 @@ function PlaceList() {
             
           })
         }
-    </CalciteTileGroup>
+    </div>
   )
 }
 
