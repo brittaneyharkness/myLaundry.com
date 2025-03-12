@@ -17,14 +17,28 @@ function PlaceList() {
     <div className='flex flex-row flex-wrap w-[100%] justify-evenly gap-4'>
         {
           places.map(place => {
-            if(place.city === city && place.state === state_abbr[0]){
-              return(
-                <div 
-                className='flex w-40 h-30 bg-gray-400 justify-center items-center text-white text-[20px] font-bold cursor-pointer hover:bg-gray-600 transition-all'>
-                  {place.name}
-                  </div>
-              )
+            if(city && state){
+              if(place.city === city && place.state === state_abbr[0]){
+                return(
+                  <div 
+                  className='flex w-40 h-30 bg-gray-400 justify-center items-center text-white text-[20px] font-bold cursor-pointer hover:bg-gray-600 transition-all'>
+                    {place.name}
+                    </div>
+                )
+              }
             }
+            if(!city && state){
+              if(place.state === state_abbr[0]){
+                return(
+                  <div 
+                  key={place.id}
+                  className='flex w-40 h-30 bg-gray-400 justify-center items-center text-white text-[20px] font-bold cursor-pointer hover:bg-gray-600 transition-all'>
+                    {place.name}
+                  </div>
+                )
+              }
+            }
+            
             
           })
         }

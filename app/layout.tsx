@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import { Box, Container } from "@mui/material";
+import "@esri/calcite-components/dist/calcite/calcite.css";
 
 const notoSans = Noto_Sans({
   variable: "--font-geist-sans",
@@ -24,12 +24,8 @@ export default function RootLayout({
       <body
         className={`${notoSans.variable} antialiased`}
       >
-        <div>
-          <Header/>
-          {children}
-        </div>
-        
-        
+        <Header/>
+        {children}
       </body>
     </html>
   );
