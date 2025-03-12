@@ -2,6 +2,10 @@ import React from 'react'
 import places from '../data/listing.json'
 import regions from '../data/regions.json'
 import { useSearchParams } from 'next/navigation';
+import { CalciteCard, CalciteTile, CalciteTileGroup } from '@esri/calcite-components-react';
+
+import "@esri/calcite-components/components/calcite-cared"
+import "@esri/calcite-components/components/calcite-tile"
 
 function PlaceList() {
 
@@ -14,27 +18,25 @@ function PlaceList() {
 
       
   return (
-    <div className='flex flex-row flex-wrap w-[100%] justify-evenly gap-4'>
+    <div className='flex gap-3 mt-5'>
         {
           places.map(place => {
             if(city && state){
               if(place.city === city && place.state === state_abbr[0]){
                 return(
-                  <div 
-                  className='flex w-40 h-30 bg-gray-400 justify-center items-center text-white text-[20px] font-bold cursor-pointer hover:bg-gray-600 transition-all'>
-                    {place.name}
-                    </div>
+                  <CalciteCard label={place.name} heading={place.name}>
+                    
+                  </CalciteCard> 
+
                 )
               }
             }
             if(!city && state){
               if(place.state === state_abbr[0]){
                 return(
-                  <div 
-                  key={place.id}
-                  className='flex w-40 h-30 bg-gray-400 justify-center items-center text-white text-[20px] font-bold cursor-pointer hover:bg-gray-600 transition-all'>
-                    {place.name}
-                  </div>
+                  <CalciteCard label={place.name} heading={place.name}>
+                   
+                  </CalciteCard> 
                 )
               }
             }
@@ -42,7 +44,7 @@ function PlaceList() {
             
           })
         }
-    </div>
+    </CalciteTileGroup>
   )
 }
 
