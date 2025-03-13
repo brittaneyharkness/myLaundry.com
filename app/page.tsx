@@ -16,7 +16,7 @@ export default function Home() {
     //      <Regions/>
     // </div>
     <CalciteShell className="mt-16">
-      <Hero/>
+      <Hero />
       <LocationTree/>
       {/* <Regions/> */}
     </CalciteShell>

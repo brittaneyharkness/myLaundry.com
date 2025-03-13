@@ -15,7 +15,7 @@ function Header() {
   const navItems = ['Link1', 'Link2', 'Link3'];
 
   return (
-    <CalciteNavigation slot="header">
+    <CalciteNavigation slot="header" className="fixed w-full z-10">
       <CalciteNavigationLogo slot="logo" thumbnail='/vercel.svg' heading='My Laundry' description='Best laundromats near you'>
       </CalciteNavigationLogo>
       <CalciteMenu slot="content-end">

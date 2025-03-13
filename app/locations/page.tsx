@@ -13,23 +13,56 @@ import "@esri/calcite-components/components/calcite-block"
 import "@esri/calcite-components/components/calcite-label"
 import "@esri/calcite-components/components/calcite-button"
 
-const amenities = [
-    "attendent", "large capacity",
-    "free drying", "cards accepted", "wifi", "bathroom",
-    "drop-off service", "seating", "laundry products",
-    "snacks", "parking"
-]
+export const amenities = {
+    "attendent": {
+      icon: "person"
+    }, 
+    "large capacity":{
+      icon: ""
+    },
+    "free drying":{
+      icon: ""
+    }, 
+    "cards accepted":{
+      icon:"credit-card"
+    }, 
+    "wifi":{
+      icon:"wifi"
+    }, 
+    "bathroom": {
+      icon:""
+    },
+    "drop-off service": {
+      icon:""
+    }, 
+    "seating": {
+      icon:""
+    }, 
+    "laundry products": {
+      icon:""
+    },
+    "snacks": {
+      icon:""
+    }, 
+    "parking": {
+      icon:"car"
+    }
+}
+    
+
 
 export default function Locations() {
     const searchParams = useSearchParams();
     const state = searchParams.get("state") || "";
     const city = searchParams.get("city") || "";
       return (
-        <div className=" flex flex-row">
+        <div className="pt-15 relative">
+          <div className="fixed pl-15 pt-10 w-full bg-white border-b-[1px] border-b-gray-200 z-5">
+              <Breadcrumbs/>
+            </div>
+        <div className="pt-10 flex flex-row">
  
-          <div className="p-10 w-full h-auto flex flex-col">
-
-            <Breadcrumbs/>
+          <div className="pl-15 pb-10 pt-10 w-full h-auto flex flex-col">
 
             <CalciteLabel scale="l" className="pt-5">
             {city ? `Best Laundromats in ${city}` : state && !city ?  `Best Laundromats in ${state}`: 'Locations'}
@@ -42,7 +75,7 @@ export default function Locations() {
 
             <div className="flex flex-row flex-wrap w-full">
             {
-              amenities.map((amenity, i) => {
+              Object.keys(amenities).map((amenity, i) => {
                 return(
                     <CalciteButton appearance="outline-fill" key={`amenity-${i}`} className="p-2">{amenity}</CalciteButton>
 
@@ -50,8 +83,10 @@ export default function Locations() {
               })
             }
             </div>
- 
+            <div className="overflow-y-scroll h-full">
             <PlaceList/>
+            </div>
+            
     
 
           </div>
@@ -62,7 +97,7 @@ export default function Locations() {
               Add Space
             </div>
 
-            
+            </div>   
         </div>
         // <div className="bg-gray-100 w-[100%] flex flex-row">
         //   <div className="flex justify-between flex-col container mx-auto pl-10 gap-5">
