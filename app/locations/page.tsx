@@ -12,7 +12,7 @@ import "@esri/calcite-components/components/calcite-panel"
 import "@esri/calcite-components/components/calcite-block"
 import "@esri/calcite-components/components/calcite-label"
 import "@esri/calcite-components/components/calcite-button"
-import LocationHeader from "./LocationHeader";
+import LocationHeader from "../../components/Header/LocationHeader";
 import Map from "@/components/Map";
 import Filter from "@/components/Filter";
 import Ads from "@/components/Ads";

@@ -23,13 +23,13 @@ import "@esri/calcite-components/components/calcite-label"
 import "@esri/calcite-components/components/calcite-button"
 import "@esri/calcite-components/components/calcite-link"
 
-import PlaceHeader from "./PlaceHeader";
+import PlaceHeader from "../../components/Header/PlaceHeader";
 import Map from "@/components/Map";
 import Filter from "@/components/Filter";
 import Ads from "@/components/Ads";
 import { usePlaceContext } from "@/context/PlaceContext";
 import { useEffect } from "react";
-import PlaceInfo from './PlaceInfo';
+import PlaceInfo from '../../components/PlaceInfo';
 
 export default function Place() {
     const searchParams = useSearchParams();    
@@ -78,13 +78,9 @@ export default function Place() {
     }, [searchParams, dispatch]);
 
     return (
-        <CalciteShell className="mt-28 w-full flex flex-col">
+        <CalciteShell className="mt-28 w-full flex-col">
             <PlaceHeader/>
             <PlaceInfo/>
-        
-            <div slot="panel-end" className="w-1/6 pl-5 pr-5">
-                <Ads/>
-            </div>
         </CalciteShell>
     );
 }

@@ -94,7 +94,7 @@ export default function PlaceHeader() {
                 </CalciteRating>
               </div>
               {
-                currentHours ??
+                (currentHours && currentHours !== 'unavailable') ??
                 (<div>
                   <CalciteLabel layout="inline" className="text-white align-bottom">
                     <CalciteChip className='openStatus' label={openStatus ? "Open Now" : "Closed"}>{openStatus ? "Open Now" : "Closed"}</CalciteChip>

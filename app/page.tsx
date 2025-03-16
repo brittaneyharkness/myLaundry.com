@@ -3,7 +3,7 @@
 
 import Faqs from "@/components/FAQs";
 import Filter from "@/components/Filter";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero";
 import LocationTree from "@/components/LocationTree";
 import Map from "@/components/Map";

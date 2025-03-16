@@ -11,6 +11,19 @@ export interface Place {
   state?: string;
   summary?: string;
   rating?: number;
+  open24Hours?: boolean;
+  dropOffService?: boolean;
+  largeCapacity: boolean;
+  attendant?: boolean;
+  freeDrying: boolean;
+  cardsAccepted: boolean;
+  wifi?:boolean;
+  bathroom?:boolean;
+  seating?:boolean;
+  laundryProducts?:boolean;
+  snacks?:boolean;
+  parking?:boolean;
+  wheelChairAccessible?:boolean;
   hours?: {
     monday?: string;
     tuesday?: string;

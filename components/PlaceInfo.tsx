@@ -1,5 +1,7 @@
 import { usePlaceContext } from "@/context/PlaceContext";
 import { CalciteIcon, CalciteLabel, CalciteLink } from "@esri/calcite-components-react";
+import Amenities from "./Amenities";
+import Ads from "./Ads";
 
 export default function PlaceInfo(){
 
@@ -8,34 +10,21 @@ export default function PlaceInfo(){
 
     return(
         <div className="flex p-10 h-full" slot="panel-bottom">
-            <div className="flex flex-col gap-5">
-            <div>
+            <div className="flex flex-col gap-5 pr-10">
+                <div className="w-[100%]">
                     <CalciteLabel scale="l" className="font-bold">What visitors are saying</CalciteLabel>
                     <p>{place?.summary || "No summary available."}</p>
                 </div>
                 <div>
                     <CalciteLabel scale="l" className="font-bold">Amenities</CalciteLabel>
+                    <Amenities/>
                 </div>
                 <div>
                     <CalciteLabel scale="l" className="font-bold">Location and Hours</CalciteLabel>
-                </div>
-            </div>
-
-                <div className="flex flex-col h-fit w-1/2 border border-gray-500 p-5 gap-5">
-                <div className="w-full flex justify-between font-bold">
-                    <CalciteLabel layout='inline' >
-                        {place?.phone || "No phone available"}
-                    </CalciteLabel>
-                    <CalciteIcon icon="phone"></CalciteIcon>
-                </div>
-                <div  className="w-full flex justify-between">
-                    <CalciteLabel className="font-bold">
-                        {place?.address || "No address available"}
-                        <CalciteLink href="" aria-label="Get Directions">Get Directions</CalciteLink>
-                    </CalciteLabel>
-                    <CalciteIcon icon="road-sign"></CalciteIcon>
-                </div>
-                <div className="flex flex-col">
+                    <div className="flex gap-10">
+                        <div id="map" className="w-[300px] h-[300px] bg-gray-700">
+                        </div>
+                        <div className="flex flex-col">
                     <CalciteLabel className="font-bold">Hours</CalciteLabel>
                     <div>
                         <p>Monday: {place?.hours?.monday}</p>
@@ -47,7 +36,28 @@ export default function PlaceInfo(){
                         <p>Sunday: {place?.hours?.sunday}</p>
                     </div>
                 </div>
+                    </div>
                     
+                </div>
+            </div>
+
+                <div className="flex flex-col h-[100%] w-1/3 gap-5">
+                    <div className="border border-gray-500 p-5 ">
+                        <div className="w-full flex justify-between font-bold">
+                            <CalciteLabel layout='inline' >
+                                {place?.phone || "No phone available"}
+                            </CalciteLabel>
+                            <CalciteIcon icon="phone"></CalciteIcon>
+                        </div>
+                        <div  className="w-full flex justify-between">
+                            <CalciteLabel className="font-bold">
+                                {place?.address || "No address available"}
+                                <CalciteLink href="" aria-label="Get Directions">Get Directions</CalciteLink>
+                            </CalciteLabel>
+                            <CalciteIcon icon="road-sign"></CalciteIcon>
+                        </div>
+                    </div>
+                        <Ads/>
                 </div>
             </div>
     )

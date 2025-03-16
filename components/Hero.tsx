@@ -28,7 +28,6 @@ function Hero() {
             </CalciteInput>
           </CalciteLabel>
       </div>
-
     </CalciteBlock>
   ) 
 }
