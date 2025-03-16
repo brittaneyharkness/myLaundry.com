@@ -2,8 +2,9 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { AppBar, Box, Button, Container, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { AppBar, Box, Breadcrumbs, Button, Container, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 import { CalciteMenu, CalciteMenuItem, CalciteNavigation, CalciteNavigationLogo } from '@esri/calcite-components-react';
+import { usePathname, useSearchParams } from "next/navigation";
 
 import "@esri/calcite-components/components/calcite-navigation"
 import "@esri/calcite-components/components/calcite-navigation-logo"
@@ -13,6 +14,13 @@ import "@esri/calcite-components/components/calcite-menu-item"
 function Header() {
 
   const navItems = ['Link1', 'Link2', 'Link3'];
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const state = searchParams.get("state");
+  const city = searchParams.get("city");
+  
 
   return (
     <CalciteNavigation slot="header" className="fixed w-full z-10">
@@ -25,6 +33,28 @@ function Header() {
           )
         })}
       </CalciteMenu>
+      {state && (
+  <CalciteNavigation slot="navigation-secondary">
+    <CalciteMenu slot="content-start">
+      <CalciteMenuItem breadcrumb href="/" text="Home" text-enabled />
+      <CalciteMenuItem 
+        active={!city} 
+        breadcrumb={city? true : false}
+        href={`/locations?state=${encodeURIComponent(state)}`} 
+        text={state} 
+        text-enabled
+      />
+      {city && (
+        <CalciteMenuItem 
+          active 
+          href={`/locations?state=${encodeURIComponent(state)}&city=${encodeURIComponent(city)}`} 
+          text={city} 
+          text-enabled
+        />
+      )}
+    </CalciteMenu>
+  </CalciteNavigation>
+)}
     </CalciteNavigation>
     // <div className='bg-white w-[100%]'>
     //     <div className='flex justify-between container mx-auto px-30 mt-3 gap-10'>

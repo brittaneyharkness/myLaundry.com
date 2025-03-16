@@ -55,14 +55,14 @@ export default function Locations() {
     const searchParams = useSearchParams();
     const state = searchParams.get("state") || "";
     const city = searchParams.get("city") || "";
+    
+
       return (
         <div className="pt-15 relative">
-          <div className="fixed pl-15 pt-10 w-full bg-white border-b-[1px] border-b-gray-200 z-5">
-              <Breadcrumbs/>
-            </div>
         <div className="pt-10 flex flex-row">
  
-          <div className="pl-15 pb-10 pt-10 w-full h-auto flex flex-col">
+          {/* Main Content (Title + Amenities + Listings) */}
+      <div className="pl-15 pb-10 pt-10 flex flex-col max-w-[75%] w-full">
 
             <CalciteLabel scale="l" className="pt-5">
             {city ? `Best Laundromats in ${city}` : state && !city ?  `Best Laundromats in ${state}`: 'Locations'}
@@ -83,17 +83,24 @@ export default function Locations() {
               })
             }
             </div>
-            <div className="overflow-y-scroll h-full">
-            <PlaceList/>
-            </div>
-            
-    
-
+             {/* Place Listings */}
+        <div className="w-full overflow-hidden">
+          <CalciteLabel scale="l">
+            Top 5 Laundromats
+          </CalciteLabel>
+          <div className="w-full overflow-x-auto">
+            <PlaceList top={5} />
           </div>
 
-          
-
-            <div className="bg-gray-800 flex-col w-[25%] h-[80vh] pt-10 m-5 text-white text-center">
+          <CalciteLabel>
+            Best for general
+          </CalciteLabel>
+          <div className="w-full overflow-x-auto">
+            <PlaceList />
+          </div>
+        </div>
+          </div>
+            <div className="bg-gray-800 flex-col w-[25%] h-[100vh] pt-10 m-5 text-white text-center flex-shrink-0">
               Add Space
             </div>
 
