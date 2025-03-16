@@ -7,6 +7,7 @@ export default function PlaceInfo(){
 
     const { state, dispatch } = usePlaceContext(); // Get state from context
     const place = state.place;
+    const googleMapsLink = `https://www.google.com/maps/place/?q=place_id:${place?.place_id}`;
 
     return(
         <div className="flex p-10 h-full" slot="panel-bottom">
@@ -42,7 +43,14 @@ export default function PlaceInfo(){
             </div>
 
                 <div className="flex flex-col h-[100%] w-1/3 gap-5">
-                    <div className="border border-gray-500 p-5 ">
+                    <div className="border border-gray-500 p-5 flex flex-col w-full gap-4 ">
+                    <div className="w-full flex justify-between">
+                            <CalciteLabel className="font-bold">
+                                <CalciteLink href={place?.website} target="_blank" aria-label={place?.website || "No website available"}>
+                                {place?.website || "No website available"}</CalciteLink>
+                            </CalciteLabel>
+                            <CalciteIcon icon="web"></CalciteIcon>
+                        </div>
                         <div className="w-full flex justify-between font-bold">
                             <CalciteLabel layout='inline' >
                                 {place?.phone || "No phone available"}
@@ -52,7 +60,7 @@ export default function PlaceInfo(){
                         <div  className="w-full flex justify-between">
                             <CalciteLabel className="font-bold">
                                 {place?.address || "No address available"}
-                                <CalciteLink href="" aria-label="Get Directions">Get Directions</CalciteLink>
+                                <CalciteLink href={googleMapsLink} target="_blank" aria-label="Get Directions">Get Directions</CalciteLink>
                             </CalciteLabel>
                             <CalciteIcon icon="road-sign"></CalciteIcon>
                         </div>

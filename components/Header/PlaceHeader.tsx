@@ -93,17 +93,22 @@ export default function PlaceHeader() {
                 <CalciteRating value={place?.rating} average={place?.rating} readOnly showChip>
                 </CalciteRating>
               </div>
+
               {
-                (currentHours && currentHours !== 'unavailable') ??
-                (<div>
-                  <CalciteLabel layout="inline" className="text-white align-bottom">
-                    <CalciteChip className='openStatus' label={openStatus ? "Open Now" : "Closed"}>{openStatus ? "Open Now" : "Closed"}</CalciteChip>
-                    <span  className="text-white font-bold">{currentHours}</span>
-                    <span  className="text-white">Last updated # weeks ago</span>
-                  </CalciteLabel>
+                currentHours && currentHours!=='unavailable' ?
+                <div>
+                <CalciteLabel layout="inline" className="text-white align-bottom">
+                  <CalciteChip className='openStatus' label={openStatus ? "Open Now" : "Closed"}>{openStatus ? "Open Now" : "Closed"}</CalciteChip>
+                  <span  className="text-white font-bold">{currentHours}</span>
+                  <span  className="text-white">Last updated # weeks ago</span>
+                </CalciteLabel>
                 </div>
-                )
+                :null
+                
               }
+              
+                
+              
 
             </div>
           </div>

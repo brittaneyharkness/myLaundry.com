@@ -4,7 +4,9 @@ import React, { createContext, useReducer, useContext, ReactNode } from "react";
 
 // Define the Place object shape
 export interface Place {
+  place_id?:string;
   name?: string;
+  website?:string;
   phone?: string;
   address?: string;
   city?: string;
