@@ -20,6 +20,7 @@ import "@esri/calcite-components/components/calcite-panel"
 import "@esri/calcite-components/components/calcite-block"
 import "@esri/calcite-components/components/calcite-label"
 import "@esri/calcite-components/components/calcite-button"
+import "@esri/calcite-components/components/calcite-link"
 
 import PlaceHeader from "./PlaceHeader";
 import Map from "@/components/Map";
@@ -40,15 +41,21 @@ export default function Place() {
                     <CalciteLabel>What visitors are saying</CalciteLabel>
                     <p>{place?.summary || "No summary available."}</p>
                 </div>
-                <div className="flex flex-col h-fit w-1/2 border border-gray-500 p-5">
-                    <CalciteLabel layout='inline'>
+                <div className="flex flex-col h-fit w-1/2 border border-gray-500 p-5 gap-5">
+                <div className="w-full flex justify-between">
+                    <CalciteLabel layout='inline' >
                         {place?.phone || "No phone available"}
-                        <CalciteIcon icon="phone"></CalciteIcon>
                     </CalciteLabel>
+                    <CalciteIcon icon="phone"></CalciteIcon>
+                </div>
+                <div  className="w-full flex justify-between">
                     <CalciteLabel>
                         {place?.address || "No address available"}
-                        <CalciteLink>Get Directions</CalciteLink>
+                        <CalciteLink href="" aria-label="Get Directions">Get Directions</CalciteLink>
                     </CalciteLabel>
+                    <CalciteIcon icon="road-sign"></CalciteIcon>
+                </div>
+                <div className="flex flex-col">
                     <CalciteLabel>Hours</CalciteLabel>
                     <div>
                         <p>Monday: {place?.hours?.monday}</p>
@@ -59,6 +66,8 @@ export default function Place() {
                         <p>Saturday: {place?.hours?.saturday}</p>
                         <p>Sunday: {place?.hours?.sunday}</p>
                     </div>
+                </div>
+                    
                 </div>
             </div>
         
