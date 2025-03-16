@@ -1,6 +1,7 @@
 
 "use client"
 
+import Faqs from "@/components/FAQs";
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -27,6 +28,7 @@ export default function Home() {
         <PlaceList top={5} title={'Top Coin laundromats'}/>
         <PlaceList top={5} title={'Top Drop-off Service laundromats'}/>
         <LocationTree/>
+        <Faqs/>
       </div>
       
       {/* <Regions/> */}

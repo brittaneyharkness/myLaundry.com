@@ -25,7 +25,7 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
     <CalciteCard 
       key={place.place_id}
       label={place.name}
-      className="w-[250px] min-w-[250px] h-auto"
+      className="w-1/4 min-w-[250px] h-auto pb-2 pr-2"
     >
       <div slot="heading" className="pb-5 flex flex-col gap-2">
         {place.name}   
@@ -49,7 +49,7 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
   );
 
   return (
-      <div className="flex flex-col w-full p-10 ">
+      <div className="flex flex-col w-full p-10">
         
         <div className='flex font-bold'>
           <CalciteLabel scale='l'>{title}</CalciteLabel>
