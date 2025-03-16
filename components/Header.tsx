@@ -20,6 +20,7 @@ function Header() {
 
   const state = searchParams.get("state");
   const city = searchParams.get("city");
+  const name = searchParams.get("name");
   
 
   return (
@@ -38,17 +39,26 @@ function Header() {
     <CalciteMenu slot="content-start">
       <CalciteMenuItem breadcrumb href="/" text="Home" text-enabled />
       <CalciteMenuItem 
-        active={!city} 
-        breadcrumb={city? true : false}
+        active={!city && !name} 
+        breadcrumb={city || name ? true : false}
         href={`/locations?state=${encodeURIComponent(state)}`} 
         text={state} 
         text-enabled
       />
       {city && (
         <CalciteMenuItem 
-          active 
+          active={city && !name ? true : false} 
+          breadcrumb={name ? true : false} 
           href={`/locations?state=${encodeURIComponent(state)}&city=${encodeURIComponent(city)}`} 
           text={city} 
+          text-enabled
+        />
+      )}
+      {name && (
+        <CalciteMenuItem 
+          active
+          href={`/locations?state=${encodeURIComponent(state)}&city=${encodeURIComponent(city)}&name=${encodeURIComponent(name)}`} 
+          text={name} 
           text-enabled
         />
       )}

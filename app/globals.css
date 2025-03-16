@@ -17,29 +17,10 @@ map {
 calcite-link.tree-item{
     --calcite-link-text-color: #ffff
 }
-        calcite-chip:first-of-type {
-            --calcite-color-brand: teal;
-            --calcite-color-text-1: teal;
-        }
-
-        calcite-chip:nth-of-type(2) {
-            --calcite-color-brand: darkgreen;
-            --calcite-color-text-1: darkgreen;
-        }
-
-        calcite-chip:nth-of-type(3) {
-            --calcite-color-brand: darkred;
-            --calcite-color-text-1: darkred;
-        }
-
-        calcite-chip:nth-of-type(4) {
-            --calcite-color-brand: darkorange;
-            --calcite-color-text-1: darkorange;
-        }
-
-        calcite-chip:nth-of-type(5) {
-            --calcite-color-brand: purple;
-            --calcite-color-text-1: purple;
-        }
+calcite-chip.openStatus {
+    --calcite-chip-background-color: rgb(81, 199, 81);
+    --calcite-color-text-1: white;
+}
+    
 
         
