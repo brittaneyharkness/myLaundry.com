@@ -12,7 +12,7 @@ import "@esri/calcite-components/components/calcite-button"
 
 function Hero() {
   return (
-    <CalciteBlock className='w-[100%]'>
+    <CalciteBlock className='w-[100%]' slot="panel-top">
       <div slot="content-start" className='h-40 w-[100vw] flex align-middle bg-gray-500'>
         <CalciteLabel layout='inline' className='flex p-10 justify-between w-[100%]'>
           <div className='w-full'>

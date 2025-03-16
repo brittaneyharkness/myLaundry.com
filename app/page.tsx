@@ -1,9 +1,11 @@
 
 "use client"
 
+import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import LocationTree from "@/components/LocationTree";
+import Map from "@/components/Map";
 import PlaceList from "@/components/PlaceList";
 import Regions from "@/components/Regions";
 import { CalciteShell } from "@esri/calcite-components-react";
@@ -16,8 +18,13 @@ export default function Home() {
     //      <Regions/>
     // </div>
     <CalciteShell className="mt-16">
-      <Hero />
-      <LocationTree/>
+      <Hero/>
+      <div slot="panel-bottom">
+        <Filter/>
+        <Map/>
+        <LocationTree/>
+      </div>
+      
       {/* <Regions/> */}
     </CalciteShell>
   );
