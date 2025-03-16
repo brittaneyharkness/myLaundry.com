@@ -16,8 +16,8 @@ function Hero() {
       <div slot="content-start" className='h-40 w-[100vw] flex align-middle bg-gray-500'>
         <CalciteLabel layout='inline' className='flex p-10 justify-between w-[100%]'>
           <div className='w-full'>
-            <span className='text-4xl font-extrabold p-2'>Laundromats Finder</span>
-            <span className='text-2xl'>Best laundromats year you</span>
+            <span className='text-4xl font-extrabold p-2 text-white'>Laundromats Finder</span>
+            <span className='text-2xl text-white'>Best laundromats near you</span>
           </div>
           <CalciteInput 
             scale='l' 

@@ -22,6 +22,10 @@ export default function Home() {
       <div slot="panel-bottom">
         <Filter/>
         <Map/>
+        <PlaceList top={5} title={'Top 24 hour laundromats'}/>
+        <PlaceList top={5} title={'Cheapest laundromats'}/>
+        <PlaceList top={5} title={'Top Coin laundromats'}/>
+        <PlaceList top={5} title={'Top Drop-off Service laundromats'}/>
         <LocationTree/>
       </div>
       

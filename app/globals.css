@@ -11,6 +11,11 @@
 
 map {
     height: 100px;
+
+}
+
+calcite-link.tree-item{
+    --calcite-link-text-color: #ffff
 }
         calcite-chip:first-of-type {
             --calcite-color-brand: teal;

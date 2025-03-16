@@ -10,7 +10,7 @@ import "@esri/calcite-components/components/calcite-chip"
 import "@esri/calcite-components/components/calcite-chip-group"
 import "@esri/calcite-components/components/calcite-rating"
 
-function PlaceList({ filter, top }: { filter?: string | null; top?: number | null }) {
+function PlaceList({ filter, top, title }: { filter?: string | null; top?: number | null ; title?: string}) {
   const searchParams = useSearchParams();
   const state = searchParams.get("state") || "";
   const city = searchParams.get("city") || "";
@@ -25,7 +25,7 @@ function PlaceList({ filter, top }: { filter?: string | null; top?: number | nul
     <CalciteCard 
       key={place.place_id}
       label={place.name}
-      className="w-[250px] min-w-[250px] h-auto p-2"
+      className="w-[250px] min-w-[250px] h-auto"
     >
       <div slot="heading" className="pb-5 flex flex-col gap-2">
         {place.name}   
@@ -49,19 +49,27 @@ function PlaceList({ filter, top }: { filter?: string | null; top?: number | nul
   );
 
   return (
-    <div className='overflow-x-auto whitespace-nowrap'>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col w-full p-10 ">
+        
+        <div className='flex font-bold'>
+          <CalciteLabel scale='l'>{title}</CalciteLabel>
+        </div>
+        
+        
+        <div className='flex flex-row w-full flex-wrap justify-between'>
         {places
           .filter(place => 
             (city && state && place.city === city && place.state === state_abbr) ||
-            (!city && state && place.state === state_abbr)
+            (!city && state && place.state === state_abbr) ||
+            (!city && !state)
           )
           .sort((a, b) => (b.rating || 0) - (a.rating || 0))  // Sort by rating (highest first)
           .filter(place => (!filter || place[filter] === 1))  // Apply filter if provided
           .slice(0, top || places.length) // Limit results based on `top` if provided
           .map(card)} 
+        </div>
+        
       </div>
-    </div>
   );
 }
 

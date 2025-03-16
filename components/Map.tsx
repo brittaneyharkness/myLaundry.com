@@ -21,7 +21,7 @@ const Map = () => {
         // zoom={15}
         // ></arcgis-map>
         <div
-        className="flex h-1/2 bg-blue-100 justify-center items-center"
+        className="flex h-1/3 bg-blue-100 justify-center items-center"
         >Map Placeholder
         </div>
     )

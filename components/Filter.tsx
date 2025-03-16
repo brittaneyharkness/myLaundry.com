@@ -3,12 +3,18 @@ import { CalciteButton, CalciteLabel } from "@esri/calcite-components-react"
 const Filter = () => {
 
     const amenities = {
-        "attendent": {
-          icon: "person"
-        }, 
+        "24 hour": {
+            icon:""
+        },
+        "drop-off service": {
+          icon:""
+        },
         "large capacity":{
           icon: ""
         },
+        "attendent": {
+          icon: "person"
+        }, 
         "free drying":{
           icon: ""
         }, 
@@ -19,9 +25,6 @@ const Filter = () => {
           icon:"wifi"
         }, 
         "bathroom": {
-          icon:""
-        },
-        "drop-off service": {
           icon:""
         }, 
         "seating": {
