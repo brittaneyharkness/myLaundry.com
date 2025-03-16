@@ -1,7 +1,8 @@
 "use client";
 
+import places from '../../data/listing.json'
 import Breadcrumbs from "@/components/Breadcrumbs";
-import PlaceList from "@/components/PlaceList";
+import PlaceList, { parseHours } from "@/components/PlaceList";
 import { 
     CalciteBlock, 
     CalciteButton, 
@@ -27,49 +28,59 @@ import Map from "@/components/Map";
 import Filter from "@/components/Filter";
 import Ads from "@/components/Ads";
 import { usePlaceContext } from "@/context/PlaceContext";
+import { useEffect } from "react";
+import PlaceInfo from './PlaceInfo';
 
 export default function Place() {
     const searchParams = useSearchParams();    
-    const { state } = usePlaceContext(); // Get state from context
+    const { state, dispatch } = usePlaceContext(); // Get state from context
     const place = state.place;
+
+    useEffect(() => {
+        // Retrieve the parameters from the URL
+        const placeName = searchParams.get("name");
+        const placeState = searchParams.get("state");
+        const placeCity = searchParams.get("city");
+
+        // Ensure all necessary parameters exist
+        if (placeName && placeState && placeCity) {
+            // Find the place object that matches the URL parameters
+            const matchingPlace = places.find(
+                (place) =>
+                    place.name === placeName &&
+                    place.state === placeState &&
+                    place.city === placeCity
+            );
+
+            // If a matching place is found, dispatch it to the context
+            if (matchingPlace) {
+                const parsedHours = {
+                    monday: parseHours(matchingPlace.hrsMonday),
+                    tuesday: parseHours(matchingPlace.hrsTuesday),
+                    wednesday: parseHours(matchingPlace.hrsWednesday),
+                    thursday: parseHours(matchingPlace.hrsThursday),
+                    friday: parseHours(matchingPlace.hrsFriday),
+                    saturday: parseHours(matchingPlace.hrsSaturday),
+                    sunday: parseHours(matchingPlace.hrsSunday),
+                };
+
+                dispatch({
+                    type: "SET_PLACE",
+                    payload: {
+                        place: {
+                            ...matchingPlace,
+                            hours: parsedHours, // Add parsed hours to the place object
+                        },
+                    },
+                });
+            }
+        }
+    }, [searchParams, dispatch]);
 
     return (
         <CalciteShell className="mt-28 w-full flex flex-col">
             <PlaceHeader/>
-            <div className="flex p-10 h-full" slot="panel-bottom">
-                <div>
-                    <CalciteLabel>What visitors are saying</CalciteLabel>
-                    <p>{place?.summary || "No summary available."}</p>
-                </div>
-                <div className="flex flex-col h-fit w-1/2 border border-gray-500 p-5 gap-5">
-                <div className="w-full flex justify-between">
-                    <CalciteLabel layout='inline' >
-                        {place?.phone || "No phone available"}
-                    </CalciteLabel>
-                    <CalciteIcon icon="phone"></CalciteIcon>
-                </div>
-                <div  className="w-full flex justify-between">
-                    <CalciteLabel>
-                        {place?.address || "No address available"}
-                        <CalciteLink href="" aria-label="Get Directions">Get Directions</CalciteLink>
-                    </CalciteLabel>
-                    <CalciteIcon icon="road-sign"></CalciteIcon>
-                </div>
-                <div className="flex flex-col">
-                    <CalciteLabel>Hours</CalciteLabel>
-                    <div>
-                        <p>Monday: {place?.hours?.monday}</p>
-                        <p>Tuesday: {place?.hours?.tuesday}</p>
-                        <p>Wednesday: {place?.hours?.wednesday }</p>
-                        <p>Thursday: {place?.hours?.thursday}</p>
-                        <p>Friday: {place?.hours?.friday }</p>
-                        <p>Saturday: {place?.hours?.saturday}</p>
-                        <p>Sunday: {place?.hours?.sunday}</p>
-                    </div>
-                </div>
-                    
-                </div>
-            </div>
+            <PlaceInfo/>
         
             <div slot="panel-end" className="w-1/6 pl-5 pr-5">
                 <Ads/>

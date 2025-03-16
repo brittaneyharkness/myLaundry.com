@@ -7,6 +7,8 @@ export interface Place {
   name?: string;
   phone?: string;
   address?: string;
+  city?: string;
+  state?: string;
   summary?: string;
   rating?: number;
   hours?: {

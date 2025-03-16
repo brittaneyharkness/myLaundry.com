@@ -14,6 +14,7 @@ import "@esri/calcite-components/components/calcite-label"
 import "@esri/calcite-components/components/calcite-button"
 import "@esri/calcite-components/components/calcite-rating"
 import { usePlaceContext } from "@/context/PlaceContext";
+import { useEffect, useState } from "react";
 
 export const getCurrentDay = (): string => {
   const daysOfWeek: string[] = [
@@ -60,10 +61,23 @@ export default function PlaceHeader() {
 
     const { state } = usePlaceContext();
     const place = state.place;
-    const currentDay = `placeHours${getCurrentDay()}`
-    console.log("current day key: ", currentDay)
-    const currentHours = place ? [currentDay as keyof typeof place] : ""
-    const openStatus = isPlaceOpen(currentHours?.toString())
+    const [currentHours, setCurrentHours] = useState<string | null>(null);
+    const [openStatus, setOpenStatus] = useState<boolean | null>(null);
+
+    useEffect(() => {
+
+      if(place){
+        const currentDay = getCurrentDay().toLowerCase();
+        console.log("current day key: ", currentDay)
+        const hours = place.hours ? place.hours[currentDay as keyof typeof place.hours] : null
+        console.log("current day hours: ", hours)
+        setCurrentHours(hours || null);
+        const open = isPlaceOpen(currentHours?.toString())
+        setOpenStatus(open)
+      }
+      
+
+    }, [place])
 
     console.log("current hours: ", currentHours)
 
@@ -79,13 +93,18 @@ export default function PlaceHeader() {
                 <CalciteRating value={place?.rating} average={place?.rating} readOnly showChip>
                 </CalciteRating>
               </div>
-              <div>
-                <CalciteLabel layout="inline" className="text-white align-bottom">
-                  <CalciteChip className='openStatus' label={openStatus ? "Open Now" : "Closed"}>{openStatus ? "Open Now" : "Closed"}</CalciteChip>
-                  <span  className="text-white font-bold">{currentHours}</span>
-                  <span  className="text-white">Last updated # weeks ago</span>
-                </CalciteLabel>
-              </div>
+              {
+                currentHours ??
+                (<div>
+                  <CalciteLabel layout="inline" className="text-white align-bottom">
+                    <CalciteChip className='openStatus' label={openStatus ? "Open Now" : "Closed"}>{openStatus ? "Open Now" : "Closed"}</CalciteChip>
+                    <span  className="text-white font-bold">{currentHours}</span>
+                    <span  className="text-white">Last updated # weeks ago</span>
+                  </CalciteLabel>
+                </div>
+                )
+              }
+
             </div>
           </div>
     
