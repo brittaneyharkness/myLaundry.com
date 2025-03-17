@@ -18,7 +18,7 @@ export default function PlaceInfo(){
                 </div>
                 <div>
                     <CalciteLabel scale="l" className="font-bold">Amenities</CalciteLabel>
-                    <Amenities/>
+                    <Amenities place={place}/>
                 </div>
                 <div>
                     <CalciteLabel scale="l" className="font-bold">Location and Hours</CalciteLabel>

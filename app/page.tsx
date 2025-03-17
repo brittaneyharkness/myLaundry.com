@@ -23,10 +23,10 @@ export default function Home() {
       <div slot="panel-bottom">
         <Filter/>
         <Map/>
-        <PlaceList top={5} title={'Top 24 hour laundromats'}/>
-        <PlaceList top={5} title={'Cheapest laundromats'}/>
-        <PlaceList top={5} title={'Top Coin laundromats'}/>
-        <PlaceList top={5} title={'Top Drop-off Service laundromats'}/>
+        <PlaceList top={8} title={'Top 24 hour laundromats'} filter={'open24Hours'}/>
+        <PlaceList top={8} title={'Cheapest laundromats'} filter={'affordable'}/>
+        <PlaceList top={8} title={'Top Coin laundromats'} filter={'cashOnly'}/>
+        <PlaceList top={8} title={'Top Drop-off Service laundromats'} filter={'dropOffService'}/>
         <LocationTree/>
         <Faqs/>
       </div>

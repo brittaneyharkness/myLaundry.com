@@ -88,9 +88,10 @@ export default function PlaceHeader() {
                 <div>
                   <span className='text-4xl font-extrabold pr-2 text-white'>{place?.name}</span>
                 </div>
+
                 </CalciteLabel>
               <div>
-                <CalciteRating value={place?.rating} average={place?.rating} readOnly showChip>
+                <CalciteRating value={place?.rating} average={place?.rating} count={place?.user_ratings_total ? place?.user_ratings_total  : 0} readOnly showChip>
                 </CalciteRating>
               </div>
 

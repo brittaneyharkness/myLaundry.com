@@ -10,6 +10,7 @@ import "@esri/calcite-components/components/calcite-card"
 import "@esri/calcite-components/components/calcite-chip"
 import "@esri/calcite-components/components/calcite-chip-group"
 import "@esri/calcite-components/components/calcite-rating"
+import Amenities from './Amenities';
 
 export const parseHours = (hoursString: string): string => {
   // Remove the day prefix (e.g., "Monday: ")
@@ -30,26 +31,52 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
   // Function to navigate to the Place Details page
   const handleNavigation = (place: any) => {
     dispatch({
-        type: "SET_PLACE",
-        payload: {
-            place: {
-                name: place.name,
-                phone: place.phone,
-                address: place.formatted_address,
-                summary: place.summary,
-                rating: place.rating,
-                hours: {
-                    monday: parseHours(place.hrsMonday),
-                    tuesday: parseHours(place.hrsTuesday),
-                    wednesday: parseHours(place.hrsWednesday),
-                    thursday: parseHours(place.hrsThursday),
-                    friday: parseHours(place.hrsFriday),
-                    saturday: parseHours(place.hrsSaturday),
-                    sunday: parseHours(place.hrsSunday),
-                },
-            },
-        },
-    });
+      type: "SET_PLACE",
+      payload: {
+          place: {
+              name: place.name,
+              phone: place.phone,
+              address: place.formatted_address,
+              summary: place.summary,
+              rating: place.rating,
+              user_ratings_total: place.user_ratings_total,
+              photos: place.photos ? place.photos.map(photo => ({ photo_reference: photo.photo_reference })) : [],
+              geometry: place.geometry ? { location: { lat: place.geometry.location.lat, lng: place.geometry.location.lng } } : null,
+              open24Hours: !!place.open24Hours,
+              dropOffService: !!place.dropOffService,
+              sameDayService: !!place.sameDayService,
+              largeCapacityMachines: !!place.largeCapacityMachines,
+              efficientMachines: !!place.efficientMachines,
+              attendent: !!place.attendent,
+              freeDrying: !!place.freeDrying,
+              cardsAccepted: !!place.cardsAccepted,
+              prepaidCardsRequired: !!place.prepaidCardsRequired,
+              digitalPaymentAccepted: !!place.digitalPaymentAccepted,
+              cashOnly: !!place.cashOnly,
+              entertainment: !!place.entertainment,
+              wifi: !!place.wifi,
+              bathroom: !!place.bathroom,
+              seating: !!place.seating,
+              laundryProducts: !!place.laundryProducts,
+              snacks: !!place.snacks,
+              parking: !!place.parking,
+              wheelchairAccessibleParking: !!place.wheelchairAccessibleParking,
+              clean: !!place.clean,
+              brokenMachines: !!place.brokenMachines,
+              affordable: !!place.affordable,
+              hours: {
+                  monday: parseHours(place.hrsMonday),
+                  tuesday: parseHours(place.hrsTuesday),
+                  wednesday: parseHours(place.hrsWednesday),
+                  thursday: parseHours(place.hrsThursday),
+                  friday: parseHours(place.hrsFriday),
+                  saturday: parseHours(place.hrsSaturday),
+                  sunday: parseHours(place.hrsSunday),
+              },
+          },
+      },
+  });
+  
 
     router.push(
         `/place?name=${encodeURIComponent(place.name)}&state=${encodeURIComponent(place.state)}&city=${encodeURIComponent(place.city)}`
@@ -69,19 +96,13 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
         {place.name}   
         <CalciteLabel scale="s">
           Visitor rating
-          <CalciteRating value={place.rating} average={place.rating} readOnly showChip={true}></CalciteRating> 
+          <CalciteRating value={place.rating} average={place.rating} readOnly showChip={true} count={place?.user_ratings_total ? place?.user_ratings_total  : 0}></CalciteRating> 
         </CalciteLabel>
       </div>
-
-      <CalciteChipGroup>
-        {Object.keys(amenities).map((amenity: string, i: number) => 
-          place[amenity.replace(" ", "_")] === 1 ? (
-            <CalciteChip scale="s" key={`${place.place_id}-${i}`} label={amenity}>
-              {amenity}
-            </CalciteChip>
-          ) : null
-        )}
-      </CalciteChipGroup>
+      <div>
+      <Amenities place={place}/>
+      </div>
+        
     </CalciteCard>
   );
 
@@ -91,7 +112,7 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
         <CalciteLabel scale='l'>{title}</CalciteLabel>
       </div>
 
-      <div className='flex flex-row w-full flex-wrap justify-between'>
+      <div className='flex flex-row w-full flex-wrap justify-evenly'>
         {places
           .filter(place => 
             (city && stateAbbr && place.city === city && place.state === stateAbbr) ||
@@ -99,7 +120,7 @@ function PlaceList({ filter, top, title }: { filter?: string | null; top?: numbe
             (!city && !stateAbbr)
           )
           .sort((a, b) => (b.rating || 0) - (a.rating || 0))  // Sort by rating (highest first)
-          .filter(place => (!filter || place[filter] === 1))  // Apply filter if provided
+          .filter(place => (!filter || place[filter]))  // Apply filter if provided
           .slice(0, top || places.length) // Limit results based on `top` if provided
           .map(card)} 
       </div>

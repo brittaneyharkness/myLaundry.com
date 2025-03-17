@@ -1,69 +1,47 @@
 import { usePlaceContext } from "@/context/PlaceContext"
-import { CalciteButton, CalciteLabel } from "@esri/calcite-components-react"
+import { CalciteButton, CalciteChip, CalciteLabel } from "@esri/calcite-components-react"
 
-export default function Amenities(){
+// Define the interface for the props
+interface AmenitiesProps {
+  place: { [key: string]: any } | null;  // Adjust the type as needed for your `place` object
+}
 
-    const { state } = usePlaceContext()
-    const place = state
+export default function Amenities({ place }: AmenitiesProps){
 
-    const amenities = {
-            "24 hour": {
-                icon:""
-            },
-            "drop-off service": {
-              icon:""
-            },
-            "large capacity":{
-              icon: ""
-            },
-            "attendent": {
-              icon: "person"
-            }, 
-            "free drying":{
-              icon: ""
-            }, 
-            "cards accepted":{
-              icon:"credit-card"
-            }, 
-            "wifi":{
-              icon:"wifi"
-            }, 
-            "bathroom": {
-              icon:""
-            }, 
-            "seating": {
-              icon:""
-            }, 
-            "laundry products": {
-              icon:""
-            },
-            "snacks": {
-              icon:""
-            }, 
-            "parking": {
-              icon:"car"
-            }
-        }
-    
-        return(
-            <div className="flex flex-col items-center p-10 font-bold" >
-                {
-                Object.keys(amenities).map((amenity : string, i: number) => {
-        
-                    if( place && place[amenity as keyof typeof place]){
-                        return(
-                            <CalciteButton 
-                            appearance="outline-fill" 
-                            key={`amenity-${i}`} 
-                            className="p-2">{amenity}</CalciteButton>
+    const amenities = [
+        'open24Hours', 'wheelchairAccessibleParking', 'attendent',
+        'clean', 'largeCapacityMachines', 'efficientMachines', 'freeDrying',
+        'brokenMachines', 'cardsAccepted', 'prepaidCardsRequired',
+        'digitalPaymentAccepted', 'cashOnly', 'wifi', 'entertainment',
+        'bathroom', 'dropOffService', 'sameDayService', 'seating',
+        'laundryProducts', 'snacks', 'affordable', 'parking',
+    ]
+
+    // Function to convert camelCase to space-separated lowercase words
+    const formatAmenity = (amenity: string) => {
+        return amenity.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase()
+    }
+
+    return (
+        <div className="flex flex-row flex-wrap items-center font-bold">
+            {
+                amenities.map((amenity: string, i: number) => {
+                    if (place && place[amenity as keyof typeof place]) {
+                        const formattedAmenity = formatAmenity(amenity)
+                        return (
+                            <CalciteChip
+                                appearance="outline-fill"
+                                key={`amenity-${i}`}
+                                label={formattedAmenity}
+                                scale='s'
+                                className="p-1"
+                            >
+                                {formattedAmenity}
+                            </CalciteChip>
                         )
                     }
-                
                 })
             }
-              
-            
-            </div>
-            
-        )
+        </div>
+    )
 }

@@ -15,17 +15,26 @@ export interface Place {
   rating?: number;
   open24Hours?: boolean;
   dropOffService?: boolean;
-  largeCapacity: boolean;
-  attendant?: boolean;
+  sameDayService?:boolean;
+  largeCapacityMachines?: boolean;
+  efficientMachines?:boolean;
+  attendent?: boolean;
   freeDrying: boolean;
   cardsAccepted: boolean;
+  prepaidCardsRequired?: boolean;
+  digitalPaymentAccepted?:boolean;
+  cashOnly?:boolean;
+  entertainment?:boolean;
   wifi?:boolean;
   bathroom?:boolean;
   seating?:boolean;
   laundryProducts?:boolean;
   snacks?:boolean;
   parking?:boolean;
-  wheelChairAccessible?:boolean;
+  wheelchairAccessibleParking?:boolean;
+  clean?:boolean;
+  brokenMachines?:boolean;
+  affordable?:boolean;
   hours?: {
     monday?: string;
     tuesday?: string;
@@ -35,6 +44,9 @@ export interface Place {
     saturday?: string;
     sunday?: string;
   };
+  user_ratings_total?: number | null;
+  photos?: { photo_reference: string }[];
+  geometry?: { location: { lat: number; lng: number } };
 }
 
 // Define the state shape
